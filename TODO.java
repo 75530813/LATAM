@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class TODO {
 
-    private static final int MAX_PERSONAS = 4; // Número máximo de personas para registro
+    private static final int MAX_PERSONAS = 4;
 
     private String[] Nombres;
     private String[] Apellidos;
@@ -67,11 +67,11 @@ public class TODO {
 
     public void fregistro() {
         while (ContadorPersonas < MAX_PERSONAS) {
-            System.out.println("***************");
+            System.out.println("***");
             System.out.println("*                                       *");
             System.out.println("*  ✈️- BIENVENIDOS A VIAJES LATAM-✈️    *");
             System.out.println("*                                       *");
-            System.out.println("***************");
+            System.out.println("***");
             System.out.println("----DATOS DE LA PERSONA PARA LA COMPRA DE PASAJE----");
 
             System.out.println("Ingrese su Nombre:");
@@ -150,7 +150,7 @@ public class TODO {
         System.out.println();
 
         int opcion = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea pendiente después de nextInt()
+        scanner.nextLine();
 
         switch (opcion) {
             case 1:
@@ -226,7 +226,6 @@ public class TODO {
         System.out.println("Ingrese los primeros 9 dígitos de la tarjeta:");
         String primerosDigitos = scanner.nextLine();
 
-        // Validación de los primeros 9 dígitos (solo a modo de ejemplo, no es una validación real)
         if (primerosDigitos.length() != 9 || !primerosDigitos.matches("[0-9]+")) {
             System.out.println("Número de tarjeta inválido.");
             pagarConTarjeta(subtotalPasajes);
@@ -305,17 +304,16 @@ public class TODO {
 
         String nombreArchivo = "Ticket_" + fechaActual + ".txt";
         File archivo = new File(nombreArchivo);
-
         try (FileWriter escritor = new FileWriter(archivo)) {
-            escritor.write("**************TICKET DE VIAJE**************\n");
+            escritor.write("**BOLETA DE VENTA**\n");
             escritor.write("Fecha de emisión: " + fechaActual + "\n");
             escritor.write("Origen: Lima\n");
             escritor.write("Destino: " + destino[0] + "\n");
             escritor.write("Monto sin IGV: $" + subtotalPasajes + "\n");
             escritor.write("IGV: $" + igv + "\n");
             escritor.write("Total a pagar: $" + totalPagar + "\n");
-            escritor.write("*******************************************\n");
-            System.out.println("Ticket generado correctamente. Se guardó en el archivo: " + nombreArchivo);
+            escritor.write("*****\n");
+            System.out.println("BOLETA generado correctamente. Se guardó en el archivo: " + nombreArchivo);
         } catch (IOException e) {
             System.out.println("Error al generar el ticket: " + e.getMessage());
         }
@@ -346,9 +344,7 @@ public class TODO {
     }
 
     public static void main(String[] args) {
-        ViajesLatam viajesLatam = new ViajesLatam();
+        TODO viajesLatam = new TODO();
         viajesLatam.iniciarPrograma();
     }
 }
-
-
