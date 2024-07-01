@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -40,7 +42,6 @@ public class VUELOS_LATAM {
         this.generarBoleta();
         return null;
     }
-
 
     public String seleccionarOrigen() {
         System.out.println("INDIQUE EL ORIGEN DE DONDE TOMARÁ EL VUELO");
@@ -211,7 +212,9 @@ public class VUELOS_LATAM {
         System.out.println("Email: " + email);
         System.out.println("DNI: " + dni);
         System.out.println("Pasajeros - Adultos:  " + cantidadPasajeros[0] + "  , Niños:  " + cantidadPasajeros[1] + "  , Bebés:  " + cantidadPasajeros[2]);
+
         return null;
+
     }
 
     public String  seleccionarAsientos() {
@@ -273,6 +276,8 @@ public class VUELOS_LATAM {
         stotal_mas_equi = total_mas_equi * 3.79;
         sprecio_total_pas = precio_total_pas * 3.79;
         preciototal = sprecio_total_pas + stotal_mas_equi;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String hora = sdf.format(new Date());
 
         String bole = "-------------------------------------------------------------------------\n" +
                 "----------   /// ✈ BOLETA ELECTRÓNICA LATAM AIRPLANES ✈///   ---------\n" +
@@ -280,12 +285,12 @@ public class VUELOS_LATAM {
                 "______________________________________________________________________________________\n|\n"+
 
                 "|  TARJETA DE EMBARQUE/BOARDING                        PASSS                ✈ LATAM |\n|\n|"+
-                "" + nombre + "/" + apellido + "                                  " +
+                "" + nombre + "/" + apellido + "                                " +
                 "Email                        DNI                 \n" +
-                "|                            " + email + "                       "  + dni + "\n|\n" +
+                "|                          " + email + "                       "  + dni + "\n|\n" +
 
-                "|FECHA DE IDA                                                FECHA DE VUELTA \n|"
-                + hora + "/" + dia + "/" + mes + "                                                          " + hora_vuelta + "/" + dia_vuelta + "/" + mes_vuelta + "\n|\n" +
+                "|FECHA DE IDA                                          FECHA DE VUELTA \n|"
+                 + hora  + "                                       "  + "/" + dia_vuelta + "/" + mes_vuelta + "\n|\n" +
 
                 "|DESDE                                               HASTA \n|"
                 + origen + "                                                "+ destino + "\n|\n" +
@@ -299,11 +304,12 @@ public class VUELOS_LATAM {
                 "MONTO TOTAL DE EQUIPAJE : *USD " + total_mas_equi + "   *Soles: " + stotal_mas_equi + "\n" +
                 "PRECIO TOTAL: s/" + preciototal + "\n";
 
-                System.out.println("Contenido de la boleta:");
+        System.out.println("Contenido de la boleta:");
 
-                System.out.println(bole);
+        System.out.println(bole);
+
         try {
-            FileWriter boletaFile = new FileWriter("D:\\ boleta_latam.txt");
+            FileWriter boletaFile = new FileWriter("D:\\boleta_latam.txt");
             boletaFile.write(bole);
             boletaFile.close();
             System.out.println("Boleta generada con éxito");
@@ -313,6 +319,7 @@ public class VUELOS_LATAM {
         }
     }
     public static void main(String[] args) {
+
         System.out.println("---------------------------------------------------------------");
         System.out.println("----------/// ✈ BIENVENIDO A LATAM AIRPLANES ✈   ///--------------");
         System.out.println("                    ░░░░░░░░▒▒▒▒▒░░░░░▄█░░");
