@@ -6,10 +6,7 @@ import java.util.Arrays;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class VUELOS_LATAM {
-
-
     private static Scanner sc = new Scanner(System.in);
     String[] CIUDADES = {"LIMA", "CAJAMARCA", "PUCALLPA", "PIURA", "AREQUIPA", "CUSCO", "TUMBES", "TACNA", "IQUITOS", "JULIACA"};
     double[] PRECIO_BASICOCIUDADES = {44.33, 51.41, 39.41, 58.91, 44.25, 50.4, 45.51, 78.05, 50.23, 51.41, 30, 86, 54, 40, 37, 70};
@@ -95,30 +92,31 @@ public class VUELOS_LATAM {
         seleccionarMetodoPago();
         generarBoleta();
     }
-    public String seleccionarOrigen() {
+
+    public void seleccionarOrigen() {
         System.out.println("INDIQUE EL ORIGEN DE DONDE TOMARÁ EL VUELO");
         mostrarOpciones(CIUDADES);
         origen = sc.next().toUpperCase();
         if (!Arrays.asList(CIUDADES).contains(origen)) {
             System.out.println("Opción incorrecta, intente de nuevo.");
             seleccionarOrigen();
-        }return null;
+        }
     }
 
-    public String  seleccionarDestino() {
+    public void  seleccionarDestino() {
         System.out.println("AHORA INDIQUE SU DESTINO ");
         mostrarOpciones(sinCiudad(origen));
         destino = sc.next().toUpperCase();
         if (!Arrays.asList(CIUDADES).contains(destino) || destino.equals(origen)) {
             System.out.println("Opción incorrecta, intente de nuevo.");
             seleccionarDestino();
-        }return null;
+        }
     }
 
-    public String  mostrarOpciones(String[] opciones) {
+    public void  mostrarOpciones(String[] opciones) {
         for (String opcion : opciones) {
             System.out.println(opcion);
-        }return null;
+        }
     }
 
     public String [] sinCiudad(String ciudad) {
@@ -128,8 +126,7 @@ public class VUELOS_LATAM {
     }
 
     public String SELECCION_FECHA (){
-        System.out.println("Ahora ingrese la fecha en la cual planea viajar");
-        System.out.println("Ingrese el día:");
+        System.out.println("Ahora ingrese la fecha en la cual planea viajar\nIngrese el día:");
         dia = sc.nextInt();
         while (dia < 1 || dia > 31) {
             System.out.println("Día incorrecto. Ingrese un valor válido (1-31):");
@@ -153,44 +150,30 @@ public class VUELOS_LATAM {
         System.out.println("¿VIAJARA DE REGRESO? (1.-SI)(2.-NO)");
         int resp_vuelta=sc.nextInt();
         if (resp_vuelta==1){
-
-
             System.out.println("Ahora ingrese la fecha en la cual planea viajar  de regreso");
             System.out.println("Ingrese el día:");
             dia_vuelta = sc.nextInt();
             while (dia < 1 || dia > 31) {
-
-
                 System.out.println("Día incorrecto. Ingrese un valor válido (1-31):");
                 dia = sc.nextInt();
             }
-
-
             System.out.println("Ingrese el mes (1-12):");
             mes_vuelta = sc.nextInt();
             while (mes < 1 || mes > 12) {
-
-
                 System.out.println("Mes incorrecto. Ingrese un valor válido (1-12):");
                 mes = sc.nextInt();
             }
-
             System.out.println("Ingrese la hora (0-23):");
             hora_vuelta = sc.nextInt();
             while (hora < 0 || hora > 23) {
-
-
                 System.out.println("Hora incorrecta. Ingrese un valor válido (0-23):");
                 hora = sc.nextInt();
             }
-
-
             System.out.println("Usted ha seleccionado el día " + dia + ", mes " + mes + " y hora " + hora+" para su regreso ");
         }
         else if (resp_vuelta==2){
             System.out.println();
         }
-
         return null;
     }
     public int  solicitarEntero(String mensaje, int min, int max) {
@@ -206,70 +189,58 @@ public class VUELOS_LATAM {
         return null;
     }
 
-    public String más_equipaje(){
+    public void más_equipaje(){
         System.out.println("¿Desea agregar un equipaje extra?....1.SI / 2.NO");
         res_equipaje= sc.nextInt();
         if(res_equipaje==1){
-
-
-
             System.out.println("Tenemos estas opciones:\n"+"1.Equipaje de 15 kg....USD 27.00\n"+"2.Equipaje de 27 kg...USD 30.00\n"+"3.Equipaje especial...USD 50.00\n");
             System.out.println("¿Cuántos equipajes de 15 kg necesitará?");
-            int cantequi_15= sc.nextInt();
+            int cantequi_15 = sc.nextInt();
             System.out.println("¿Cuántos equipajes de 27 kg necesitará?");
-            int cantequi_27= sc.nextInt();
+            int cantequi_27 = sc.nextInt();
             System.out.println("¿Cuántos equipajes especiales necesitará?");
-            int cantequi_esp= sc.nextInt();
-            total1=cantequi_15*precio_equipaje_extra[0];
-            total2=cantequi_27*precio_equipaje_extra[1];
-            total3=cantequi_esp*precio_equipaje_extra[2];
+            int cantequi_esp = sc.nextInt();
+            total1=cantequi_15 * precio_equipaje_extra[0];
+            total2=cantequi_27 * precio_equipaje_extra[1];
+            total3=cantequi_esp * precio_equipaje_extra[2];
             total_mas_equi=total1+total2+total3;
             cant_total_mas_equi=total1+total2;
             System.out.println("Muy bien agrego "+ cantequi_15 + " equipaje de 15kg, "+ cantequi_27 +" equipajes de 27 y "+ cantequi_esp+" equipajes especiales");
             System.out.println("El agregado a su subtotal seria de: USD "+total_mas_equi);
+            precioFinal += total_mas_equi;
         } else if (res_equipaje==2) {
             System.out.println("....");
         }else{
-
-
-
-
-
             System.out.println("Opción incorrecta");
         }
-
-        return null;
     }
 
-    public String  seleccionarTarifa() {
+    public void seleccionarTarifa() {
         seleccionTarifa = solicitarEntero("Seleccione una tarifa (1-4): ", 1, 4);
         double precioBase = PRECIO_BASICOCIUDADES[Arrays.asList(CIUDADES).indexOf(destino)];
         switch (seleccionTarifa) {
             case 1:
-                precioFinal = precioBase;
+                precioFinal += precioBase;
                 break;
             case 2:
-                precioFinal = precioBase + PRECIO_LIGHT[Arrays.asList(CIUDADES).indexOf(destino)];
+                precioFinal += precioBase + PRECIO_LIGHT[Arrays.asList(CIUDADES).indexOf(destino)];
                 break;
             case 3:
-                precioFinal = precioBase + PRECIO_FULL[Arrays.asList(CIUDADES).indexOf(destino)];
+                precioFinal += precioBase + PRECIO_FULL[Arrays.asList(CIUDADES).indexOf(destino)];
                 break;
             case 4:
-                precioFinal = precioBase + PREMIUM_ECONOMY[Arrays.asList(CIUDADES).indexOf(destino)];
+                precioFinal += precioBase + PREMIUM_ECONOMY[Arrays.asList(CIUDADES).indexOf(destino)];
                 break;
             default:
                 System.out.println("Opción incorrecta.");
                 seleccionarTarifa();
+
+                precioFinal += precioBase;
+                System.out.println("Muy bien, selecciono la tarifa" + tarifas[seleccionTarifa -1] + "con un precio de " + precioFinal);
         }
-        System.out.println("Muy bien, seleccionó la tarifa " +tarifas[seleccionTarifa - 1] + " con un precio de " + precioFinal);
-        return null;
     }
 
-    public String  ingresarDatosPasajero() {
-
-
-
-
+    public void  ingresarDatosPasajero() {
         sc.nextLine();
         System.out.println("----PARA CONTINUAR CON LA COMPRA INGRESE SUS DATOS POR FAVOR----");
         System.out.println("Ingrese su nombre: ");
@@ -281,10 +252,6 @@ public class VUELOS_LATAM {
         System.out.println("Ingrese su DNI: ");
         dni = sc.next();
         System.out.println("Ingrese la cantidad de pasajeros por categoría (Adultos, Niños, Bebés)");
-
-
-
-
         for (int i = 0; i < cantidadPasajeros.length; i++) {
             cantidadPasajeros[i] = solicitarEntero("Cantidad de " + (i == 0 ? "Adultos: " : i == 1 ? "Niños: " : "Bebés: "), 0, 10);
         }
@@ -294,11 +261,9 @@ public class VUELOS_LATAM {
         System.out.println("DNI: " + dni);
         System.out.println("Pasajeros - Adultos:  " + cantidadPasajeros[0] + "  , Niños:  " + cantidadPasajeros[1] + "  , Bebés:  " + cantidadPasajeros[2]);
 
-        return null;
-
     }
 
-    public String  seleccionarAsientos() {
+    public void seleccionarAsientos() {
         System.out.println("Seleccione un numero de asiento porfavor:");
         Random random = new Random();
         boolean[] asientosOcupados = new boolean[ASIENTOS.length];
@@ -311,9 +276,6 @@ public class VUELOS_LATAM {
         int count = 0;
 
         for (int i = 0; i < totalPasajeros; i++) {
-
-
-
             boolean asientoValido = false;
             while (!asientoValido) {
                 int asiento = solicitarEntero("ASIENTOS DISPONIBLES (1-30): ", 1, 30) - 1;
@@ -327,10 +289,8 @@ public class VUELOS_LATAM {
             }
         }
         System.out.println("Asientos seleccionados: " + Arrays.toString(asientosSeleccionados));
-        return null;
     }
     public void seleccionarMetodoPago() {
-
         System.out.println("Seleccione su método de pago:");
         System.out.println("1. Tarjeta de crédito");
         System.out.println("2. Tarjeta de débito");
@@ -358,51 +318,38 @@ public class VUELOS_LATAM {
             seleccionarMetodoPago();
         }
     }
+
     public void generarBoleta() {
-
-
-
         cant_total_pas = Arrays.stream(cantidadPasajeros).sum();
-        precio_total_pas = precioFinal * cant_total_pas;
+        precio_total_pas = (precioFinal + total_mas_equi)* cant_total_pas;
         stotal_mas_equi = total_mas_equi * 3.79;
         sprecio_total_pas = precio_total_pas * 3.79;
         preciototal = sprecio_total_pas + stotal_mas_equi;
-        String tarjetaOculta = "****" + numTarjeta.substring(numTarjeta.length() - 4);
-
+        String tarjetaOculta = "************" + numTarjeta.substring(numTarjeta.length() - 4);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String hora = sdf.format(new Date());
 
         String bole = "-------------------------------------------------------------------------\n" +
-                "----------   /// ✈ BOLETA ELECTRÓNICA LATAM AIRPLANES ✈///   ---------\n" +
+                "----------   ///✈ BOLETA ELECTRÓNICA LATAM AIRPLANES ✈///   ---------\n" +
                 "-------------------------------------------------------------------------\n\n" +
-                "____\n|\n"+
-
-                "|  TARJETA DE EMBARQUE/BOARDING                        PASSS                ✈ LATAM |\n|\n|"+
-                "" + nombre + "/" + apellido + "                                " +
-                "Email                        DNI                 \n" +
-                "|                               " + email + "                       "  + dni + "\n|\n" +
-                "Número de tarjeta:                                        " + tarjetaOculta + "                 |\n" +
-
-                "|FECHA DE IDA                                          FECHA DE VUELTA \n|"
-                + hora  + "                                       "  + "/" + dia_vuelta + "/" + mes_vuelta + "\n|\n" +
-
-                "|DESDE                                               HASTA \n|"
-                + origen + "                                                "+ destino + "\n|\n" +
-                "|EN LA PUERTA   10                                     30 MINUTOS ANTES \n|\n"+
-                "|      " + tarifas[seleccionTarifa - 1] + "\n|\n" +
-                "|____|\n\n" +
-
-                "Pasajeros - Adultos: " + cantidadPasajeros[0] + ", Niños: " + cantidadPasajeros[1] + ", Bebés: " + cantidadPasajeros[2] + "\n" +
-                "Cantidad total de pasajeros:" + cant_total_pas + "\n" +
-                "MONTO TOTAL DE PASAJES: *USD " + precio_total_pas + "    *SOLES:" + sprecio_total_pas + "\n" +
-                "MONTO TOTAL DE EQUIPAJE : *USD " + total_mas_equi + "   *Soles: " + stotal_mas_equi + "\n" +
-                "PRECIO TOTAL: s/" + preciototal + "\n";
+                "|  TARJETA DE EMBARQUE/BOARDING                        PASS                ✈ LATAM |\n" +
+                "    " + nombre + "/" + apellido + "                               " + "|\n" +
+                "Email                        DNI                 \n" + "|\n" +
+                "    " + email + "                      " + dni + "|\n" +
+                "Número de tarjeta:  |                                     " + tarjetaOculta + "|\n" +
+                "FECHA DE IDA                                              FECHA DE VUELTA |\n" +
+                hora + "                                        " + "/" + dia_vuelta + "/" + mes_vuelta + "|\n" +
+                "   DESDE                                                HASTA |\n" +
+                origen + "                                                 " + destino + "|\n" +
+                "EN LA PUERTA   10                                      30 MINUTOS ANTES |\n" +
+                "      " + tarifas[seleccionTarifa - 1] + "|\n" +
+                "Pasajeros - Adultos: " + cantidadPasajeros[0] + ", Niños: " + cantidadPasajeros[1] + ", Bebés: " + cantidadPasajeros[2] + "|\n" +
+                "Cantidad total de pasajeros:" + cant_total_pas + "|\n" +
+                "MONTO TOTAL DE PASAJES: *USD " + precio_total_pas + "    *SOLES:" + sprecio_total_pas + "|\n" +
+                "MONTO TOTAL DE EQUIPAJE : *USD " + total_mas_equi + "   *Soles: " + stotal_mas_equi + "|\n" +
+                "PRECIO TOTAL: s/" + preciototal + "|\n";
 
         System.out.println("Contenido de la boleta:");
-
-
-
-
         System.out.println(bole);
 
         try {
@@ -411,19 +358,12 @@ public class VUELOS_LATAM {
             boletaFile.close();
             System.out.println("Boleta generada con éxito");
         } catch (IOException e) {
-            System.out.println("Error al generar la boleta");
-            e.printStackTrace();
+            System.out.println("Error al generar la boleta: " + e.getMessage());
         }
-
-
     }
-
     public static void main(String[] args) {
 
-
-
-
-        System.out.println("-------------------✈️✈️✈️✈️✈️✈️ BIENVENIDOS A ✈️✈️✈️✈️✈️✈️--------");
+        System.out.println("-------------------✈✈✈✈✈✈ BIENVENIDOS A ✈✈✈✈✈✈--------");
         System.out.println("░░░░▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
                 "░░░░▒▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
                 "▓▓▓▒▒░░░░▒▒▓▓▓▓▓▓░░░░░░▒▓▓░░░░░░░░░░░░▒▓▓▓░░░░░▓▓▓▓▓▓▓▓▓▓▓▓░░░░▒▓▓▒░░░░░░░░▒▒▒▒▒░░░▒▒▒▒░░░\n" +
@@ -436,12 +376,15 @@ public class VUELOS_LATAM {
                 "░░░░░▒▓▓██▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
                 "░░░░██▓▓▒▒░░░░░░░░░░░░░░░░▒░░░░░░░░░░░░░▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░░░▒▒▒░\n" +
                 "░░░░░░░░░░░░░░░░░░░░░░░░░▓░▓░░░░░░▓░░░░░▓░░░░▒░░░░▓░░░░░░░░▓░░░░▒▓▒░░░▓░░░░░▓░░░░░░░░▓░░░░\n" +
-                "░░░░▓██░░░░░░░░░░░░░░░░░▓▒▒▒▓░░░░░▓░░░░░▓▒▒▒▓░░░░░▓░░░░░░░░▓░░░░▒▒░░▒░▓░░░░░▓▒▒▒░░░░░░░▒▒▒\n\n" +
-                "----------------------------------------------------------------");
-        System.out.println("                                      ▄█");
-        System.out.println("                      ─▄▄▄▄▄▄▄▄▄▄▄▄▄▄███▄");
-        System.out.println("                   ▄█▄██▄█▄█▄█▄█▄█▄██▀▀");
-        System.out.println("                       ▀▀████▄─");
-        System.out.println("                          ▀▀██▄");
-        System.out.println("----------------------------------------------------------------\n");
+                "░░░░▓██░░░░░░░░░░░░░░░░░▓▒▒▒▓░░░░░▓░░░░░▓▒▒▒▓░░░░░▓░░░░░░░░▓░░░░▒▒░░▒░▓░░░░░▓▒▒▒░░░░░░░▒▒▒\n" +
+                "--------------");
+        System.out.println("                      ░░░░░░░░▒▒▒▒▒░░░░░▄█░░░░░░░░░░░░░░░");
+        System.out.println("                    ░▒▒─▄▄▄▄▄▄▄▄▄▄▄▄▄▄███▄░░░░░░░░░░░░░░░░░░");
+        System.out.println("                ░░▄█▄██▄█▄█▄█▄█▄█▄██▀▀▒░░░░░░░░░░░░░░░░░░░░░");
+        System.out.println("            ░░░░░▒▒▒▒░░▀▀████▄─░░░▒▒▒░░░░░░░░░░░░░░░░░░░░░░");
+        System.out.println("        ░░░░░░▒▒▒▒▒▒▒▒▒▒▒▀▀██▄▒▒▒▒▒▒░░░░░░░░");
+        System.out.println("----------------------------------------------------------------");
         System.out.println("-------------------PARA LA COMPRA DE BOLETOS--------------------");
+        VUELOS_LATAM sc = new VUELOS_LATAM ();
+        sc.fInicioSesion();
+        System.out.println("----------------------------------------------------------
