@@ -1,3 +1,4 @@
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -151,9 +152,9 @@ public class VUELOS_LATAM {
         res_equipaje();
         ingresarDatosPasajero();
         seleccionarAsientos();
-
         seleccionarMetodoPago();
         generarBoleta();
+
     }
 
     public String seleccionarOrigen() {
@@ -219,8 +220,10 @@ public class VUELOS_LATAM {
         }
         System.out.println("Usted ha seleccionado el día " + dia + ", mes " + mes + " y hora " + hora);
         System.out.println("¿VIAJARA DE REGRESO? (1.-SI)(2.-NO)");
+
         int resp_vuelta = sc.nextInt();
         if (resp_vuelta == 1) {
+
 
 
             System.out.println("Ahora ingrese la fecha en la cual planea viajar  de regreso");
@@ -261,7 +264,7 @@ public class VUELOS_LATAM {
         return null;
     }
 
-    public int solicitarEntero(String mensaje, int min, int max) {
+public int solicitarEntero(String mensaje, int min, int max) {
         int valor;
         do {
             System.out.println(mensaje);
@@ -489,11 +492,16 @@ public class VUELOS_LATAM {
                 System.out.println("Número de tarjeta incorrecto. Vuelva a ingresar su tarjeta (16 dígitos)");
                 numTarjeta = sc.nextLine();
             }
+
             System.out.println("Fecha de vencimiento (MM/YY): ");
             String fechaVen = sc.nextLine();
+
+
+
             System.out.println("Código de seguridad (CVV) (3 dígitos): ");
             int cvv = sc.nextInt();
             sc.nextLine();
+
             System.out.println("-   ¡¡¡Felicidades, tu pago se realizó con éxito!!!   -");
             generarBoleta();
         } else {
@@ -501,6 +509,7 @@ public class VUELOS_LATAM {
             seleccionarMetodoPago();
         }
     }
+
     public void generarBoleta() {
 
 
@@ -509,6 +518,7 @@ public class VUELOS_LATAM {
         stotal_mas_equi = total_mas_equi * 3.79;
         sprecio_total_pas = precio_total_pas * 3.79;
         preciototal = sprecio_total_pas + stotal_mas_equi;
+
         String tarjetaOculta = "**" + numTarjeta.substring(numTarjeta.length() - 4);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -524,7 +534,7 @@ public class VUELOS_LATAM {
                 "" + nombre + "/" + apellido + "                                " +
                 "Email                        DNI                 \n" +
                 "|                               " + email + "                       "  + dni + "\n|\n" +
-                "Número de tarjeta:                                        " + tarjetaOculta + "                 |\n" +
+                "|Número de tarjeta:                                        " + tarjetaOculta + "                 |\n" +
 
                 "|FECHA DE IDA                                          FECHA DE VUELTA \n|"
                 + hora  + "                                       "  + "/" + dia_vuelta + "/" + mes_vuelta + "\n|\n" +
@@ -535,14 +545,13 @@ public class VUELOS_LATAM {
                 "|      " + tarifas[seleccionTarifa - 1] + "\n|\n" +
                 "|__|\n\n" +
 
-                ROJO+"Pasajeros - Adultos: " + cantidadPasajeros[0] + ", Niños: " + cantidadPasajeros[1] + ", Bebés: " + cantidadPasajeros[2] + "\n" +
+                AZUL+"Pasajeros - Adultos: " + cantidadPasajeros[0] + ", Niños: " + cantidadPasajeros[1] + ", Bebés: " + cantidadPasajeros[2] + "\n" +
                 "Cantidad total de pasajeros:" + cant_total_pas + "\n" +
                 "MONTO TOTAL DE PASAJES: *USD " + precio_total_pas + "    *SOLES:" + sprecio_total_pas + "\n" +
                 "MONTO TOTAL DE EQUIPAJE : *USD " + total_mas_equi + "   *Soles: " + stotal_mas_equi + "\n" +FINCOLOR+
                 "PRECIO TOTAL: s/" + preciototal + "\n";
 
         System.out.println("Contenido de la boleta:");
-
 
 
         System.out.println(bole);
@@ -592,6 +601,9 @@ public class VUELOS_LATAM {
         VUELOS_LATAM  sc=new VUELOS_LATAM ();
 
         sc.fInicioSesion();
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("            GRACIAS POR VENIR A LATAM AIRPLANES\n            "+ "         ------VUELVA PRONTO-----");
+        System.out.println("--------------------------------------------------------------------");
 
         sc.ingresarDatosPasajero();
 
